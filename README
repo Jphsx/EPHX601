@@ -1,0 +1,93 @@
+***************************************************************
+Running
+*************************************************************
+just type
+sudo ./run
+the script will sudo modprobe usbmon then pipe usbdump into the decoder. the decoder then pipes the data into the java program.
+
+*******************************************************************
+data analysis
+*******************************************************************
+The tools used for the data analysis and GUI is java swt.  The code will compile as long as java 1.7 is installed on the machine
+
+The tools used for constructing the GUI is
+Eclipse Luna v4.4 with plugins Window Builder and SWT designer
+
+To easily modify the software with the same tools jdk 7 and maven are required
+
+sudo apt-get install openjdk-7-jdk
+sudo apt-get install maven
+
+Eclipse Luna v4.4 can be acquire from:
+http://www.eclipse.org/downloads/
+and the URL for the Window builder to be used in the eclipse plugin installer is:
+http://download.eclipse.org/windowbuilder/WB/integration/4.4/
+
+ the java program I packaged into a .jar file in the main directory for the program
+the program was packaged using the export to runnable jar function in eclipse, I recommend using
+eclipse to compile and export, the java classpaths can be a major hassle
+
+to run the java jar file
+
+sudo java -jar Display.jar
+
+Currently, building the jar file is totally  machine dependent, to run it or compile on a different machine
+exporting a new jar is necessary.  The jar classpaths are based on the absolute paths to the .class files.
+********************************************************************
+ScatterCanvas Class
+******************************************************************
+This class extends the JPanel class and uses the paint component and was written to create a lightweight 
+plotting interface for the program. (so building with extra APIs and dependencies doesnt degenerate into a nightmare)
+The main Display class instantiates a ScatterCanvas in each tab, the size of the canvas
+is based on the size of the JFrame in the main class.
+
+The ScatterCanvas class also translates the coordinates from the effective area of the tablet to coordinate onto the canvas
+therefore there is a loss of resolution. The intention of the canvas is just to visualize the data, the more precise data is written to
+a text file
+*********************************************************************
+Using USB dump (now done with shell script)
+********************************************************************
+To get the vid:pid for usbdump lsusb
+the wacom 302 vid:pid is always  056a:0302
+
+to use usbdump first compile
+	gcc usbdump.c
+or use the makefile : make dump
+
+to run usb dump
+first sudo modprobe usbmon
+then  sudo ./usbdump -d 056a:0302
+
+to pipe the decoded coordinates to the screen use the decoder
+compile with make decoder
+or compile with c++11
+	g++ -std=c++11 decoder302.cpp
+
+then pipe usbdump into decoder with bash
+******************************************************************
+Interpreting the Raw Data 
+*******************************************************************
+when reading the output x,y is given by the x line and y line
+the 302 has a resolution of 2540 lpi (lines per inch)
+and an effective area of 6x3.7 inches
+
+*note* data lines can be obtained outside the effective area of the pad. 
+ This data needs to be thrown out because the coordinates are incosistent 
+outside the effective area.
+
+the top right corner is line 0,0
+the total lines in the y direction from origin is 9398
+the total lines in the x direction from origin is 15240
+
+the width of 1 line is approximately 0.00039370073, so the uncertainty in inches 
+for a single dimension from a given position is the line width
+
+--The above information in micrometers is--
+
+effective area: 152400 x 93980 um
+line width: 9.99999854 um
+
+so the raw decoded data outputs in m^-5
+with a resolution of about 10 micrometer
+
+

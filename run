@@ -1,0 +1,5 @@
+#!/bin/bash
+# shell script
+echo "running program"
+sudo modprobe usbmon
+sudo ./dataAcquisition/usbdump -d 056a:0302 | ./decoding/dec | java -jar dataCap.jar
