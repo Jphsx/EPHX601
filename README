@@ -31,11 +31,11 @@ and you should be able to enter the url into the Work with: field, select all th
 the program was packaged using the export to runnable jar function in eclipse, I recommend using
 eclipse to compile and export, the java classpaths can be a major hassle
 
-///if you want to try compiling without eclipse
+
 to run the java jar file
 
 sudo java -jar Display.jar
-//////
+
 
 Currently, building the jar file is totally  machine dependent, to run it or compile on a different machine
 exporting a new jar is necessary.  The jar classpaths are based on the absolute paths to the .class files.
