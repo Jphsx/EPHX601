@@ -27,12 +27,21 @@ http://download.eclipse.org/windowbuilder/WB/integration/4.4/
 the program was packaged using the export to runnable jar function in eclipse, I recommend using
 eclipse to compile and export, the java classpaths can be a major hassle
 
+///if you want to try compiling without eclipse
 to run the java jar file
 
 sudo java -jar Display.jar
+//////
 
 Currently, building the jar file is totally  machine dependent, to run it or compile on a different machine
 exporting a new jar is necessary.  The jar classpaths are based on the absolute paths to the .class files.
+
+Also after setting up eclipse with windowbuilder and such, the j-free chart libraries included in the repo need to be linked to the classes for the capture software
+in eclipse you can right click the project and select properties
+in the Java Build Path section go to the Libraries tab and select
+Add External JARS and select the jars jcommon-1.023 and jfreechart-1.0.19 from jfreechart/lib.
+this will add the libraries to the project to make the plotting classes accessible
+
 ********************************************************************
 ScatterCanvas Class
 ******************************************************************
