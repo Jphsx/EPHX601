@@ -23,6 +23,10 @@ http://www.eclipse.org/downloads/
 and the URL for the Window builder to be used in the eclipse plugin installer is:
 http://download.eclipse.org/windowbuilder/WB/integration/4.4/
 
+the window builder is just a gui for building guis and should be optional, but to install it: in eclipse Help>Install New software
+and you should be able to enter the url into the Work with: field, select all the components it generates and install them
+
+
  the java program I packaged into a .jar file in the main directory for the program
 the program was packaged using the export to runnable jar function in eclipse, I recommend using
 eclipse to compile and export, the java classpaths can be a major hassle
