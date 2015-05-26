@@ -1,0 +1,48 @@
+first get the code
+
+mkdir pendulum
+cd pendulum
+git init
+git clone
+
+get eclipse Luna from the readme, put it anywhere outside the git directory
+cd into the eclipse directory
+
+./eclipse
+
+set workspace path to the cloned directory (EPHX601)
+ the path is to ~/EPHX601/
+
+inside eclipse:
+
+File>import>General>ExistingProjectsinWorkspace
+ select the dataDisplay directory as the existing project
+
+
+find the dataDisplay directory project thingy in Project explorer on the left.
+its the folder icon that is parent to src, package, and JRE system library
+ right click the datatDisplay project thing, scroll to the bottom of the context menu and select properties
+
+In the window that pops up, select Java Build Path on the Left
+After you select Java Build Path select the Libraries tab that is over on the right.
+There are a cluster of buttons on the right, select Add External JARs
+
+navigate to the jfreechart-1.0.1.9 directory in the project, the jars we need to link to the project are here
+the path to the external jars that need to be added is
+	~/EPHX601/jfreechart-1.0.1.9/lib/jcommon-1.0.23
+
+after adding jcommon there is one more to add.  Select add external JARs again and get the jar:
+
+	~/EPHX601/jfreechart-1.0.1.9/lib/jfreechart-1.0.1.9
+
+after both are added you should be able to build and run with no errors.
+
+but to use the this program with the other programs in the project, we need to make a runnable jar
+
+export project:  File>Export>Java>runnable Jar file
+Launch Configuration: Display - data Display
+Export destination:  ~ EPHX601/dataCap.jar overwriting the old dataCap.jar
+
+now the display program will start when the pipeline is initiated
+
+
